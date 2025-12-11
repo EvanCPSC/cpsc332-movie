@@ -1,3 +1,20 @@
+<?php
+  $hostname = "127.0.0.1";
+  $username = "mariadb";
+  $password = "mariadb";
+  $database = "mariadb";
+  $port = 3306;
+
+  $sqli = mysqli_connect($hostname, $username, $password, $database, $port);
+
+  if (!$sqli) {
+    die("Connection failed: " . mysqli_connect_error());
+  }
+  echo "Connected successfully";
+
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -544,4 +561,7 @@ HAVING
 
   <script src="scripts.js"></script>
 </body>
+<?php
+mysqli_close($sqli);
+?>
 </html>
