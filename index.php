@@ -12,7 +12,19 @@
     if (!$sqli) {
       die("Connection failed: " . mysqli_connect_error());
     }
-    echo "Connected successfully";
+    $password = $email = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $name = test_input($_POST["email"]);
+      $email = test_input($_POST["password"]);
+    }
+
+    function test_input($data) {
+      $data = trim($data);
+      $data = stripslashes($data);
+      $data = htmlspecialchars($data);
+      return $data;
+    }
   ?>
 
 <head>
@@ -45,10 +57,10 @@
         the views we created to answer typical business questions.
       </p>
       <ul class="bullet-list">
-        <li><strong>CINEMA</strong> – theater locations.</li>
-        <li><strong>AUDITORIUM</strong> – rooms inside each cinema.</li>
-        <li><strong>MOVIE</strong> – films being shown.</li>
-        <li><strong>SHOWTIME</strong> – specific screenings (date, time, format).</li>
+        <li><strong>CINEMA</strong> - theater locations.</li>
+        <li><strong>AUDITORIUM</strong> - rooms inside each cinema.</li>
+        <li><strong>MOVIE</strong> - films being shown.</li>
+        <li><strong>SHOWTIME</strong> - specific screenings (date, time, format).</li>
       </ul>
       <p>
         In a live demo, we would run this SQL in MySQL Workbench, show the tables,
@@ -123,13 +135,15 @@
     </section>
 
     <!-- Login -->
-    <section id="emplogin" class="section visible">
+    <section id="emplogin" class="section">
       <h2>Employee Login</h2>
-      <form action="search.php" method="POST">
-        Name: <input type="text" name="name"><br>
-        E-mail: <input type="text" name="email"><br>
-        <input type="submit">
+      <form action="search.php" method="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <p>Name: <input type="text" name="name"><br></p>
+        <p>E-mail: <input type="text" name="email"><br></p>
+        <input type="submit" class="nav-btn">
       </form>
+
+      <a href="create_acc.php">Create an Account</a>
 
     </section>
 
