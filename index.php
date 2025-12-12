@@ -1,41 +1,37 @@
-<?php
-  $hostname = "127.0.0.1";
-  $username = "mariadb";
-  $password = "mariadb";
-  $database = "mariadb";
-  $port = 3306;
-
-  $sqli = mysqli_connect($hostname, $username, $password, $database, $port);
-
-  if (!$sqli) {
-    die("Connection failed: " . mysqli_connect_error());
-  }
-  echo "Connected successfully";
-
-
-?>
-
 <!doctype html>
 <html lang="en">
+  <?php
+    $hostname = "127.0.0.1";
+    $username = "root";
+    $password = "";
+    $database = "MovieDB";
+    $port = 3306;
+
+    $sqli = mysqli_connect($hostname, $username, $password, $database, $port);
+
+    if (!$sqli) {
+      die("Connection failed: " . mysqli_connect_error());
+    }
+    echo "Connected successfully";
+  ?>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MovieDB Demo – The Relationals</title>
+  <title>Movielations</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="title-block">
-      <h1>MovieDB Cinema Demo</h1>
-      <p class="subtitle">CPSC 332 Final Project – The Relationals</p>
-      <p class="subtitle small">Adrian Vazquez · Evan Jimenez · AP Calderon · Joshua Artienda · Leighton Hsieh</p>
+      <h1>Movielations</h1>
+      <p class="subtitle">CPSC 332 Final Project by The Relationals</p>
+      <p class="subtitle small">Adrian Vazquez - Evan Jimenez - AP Calderon - Joshua Artienda - Leighton Hsieh</p>
     </div>
     <nav class="nav">
       <button class="nav-btn active" data-section="overview">Overview</button>
       <button class="nav-btn" data-section="schema">Schema</button>
-      <button class="nav-btn" data-section="data">Sample Data</button>
-      <button class="nav-btn" data-section="views">Views</button>
-      <button class="nav-btn" data-section="sql">SQL Script</button>
+      <button class="nav-btn" data-section="emplogin">Login</button>
     </nav>
   </header>
 
@@ -126,437 +122,20 @@
       </div>
     </section>
 
-    <!-- Sample Data -->
-    <section id="data" class="section">
-      <h2>Sample Data</h2>
+    <!-- Login -->
+    <section id="emplogin" class="section visible">
+      <h2>Employee Login</h2>
+      <form action="search.php" method="POST">
+        Name: <input type="text" name="name"><br>
+        E-mail: <input type="text" name="email"><br>
+        <input type="submit">
+      </form>
 
-      <h3>CINEMA</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Street_Number</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip_Code</th>
-            <th>Employees</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Galaxy Theaters</td>
-            <td>123 Main St</td>
-            <td>Anaheim</td>
-            <td>CA</td>
-            <td>92801</td>
-            <td>30</td>
-          </tr>
-          <tr>
-            <td>Starplex Cinema</td>
-            <td>456 Center Rd</td>
-            <td>Fullerton</td>
-            <td>CA</td>
-            <td>92832</td>
-            <td>25</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>AUDITORIUM</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Capacity</th>
-            <th>Cinema_Name</th>
-            <th>Three_D_Support</th>
-            <th>IMAX_Support</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Auditorium 1</td>
-            <td>150</td>
-            <td>Galaxy Theaters</td>
-            <td>TRUE</td>
-            <td>FALSE</td>
-          </tr>
-          <tr>
-            <td>Auditorium 2</td>
-            <td>80</td>
-            <td>Galaxy Theaters</td>
-            <td>FALSE</td>
-            <td>FALSE</td>
-          </tr>
-          <tr>
-            <td>Auditorium A</td>
-            <td>120</td>
-            <td>Starplex Cinema</td>
-            <td>TRUE</td>
-            <td>TRUE</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>MOVIE</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Year</th>
-            <th>Duration</th>
-            <th>Rating</th>
-            <th>Release_Date</th>
-            <th>Genre</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Inception</td>
-            <td>2010</td>
-            <td>148</td>
-            <td>PG-13</td>
-            <td>2010-07-16</td>
-            <td>Sci-Fi</td>
-            <td>A mind-bending thriller.</td>
-          </tr>
-          <tr>
-            <td>Toy Story</td>
-            <td>1995</td>
-            <td>81</td>
-            <td>G</td>
-            <td>1995-11-22</td>
-            <td>Animation</td>
-            <td>Animated family film.</td>
-          </tr>
-          <tr>
-            <td>Interstellar</td>
-            <td>2014</td>
-            <td>169</td>
-            <td>PG-13</td>
-            <td>2014-11-07</td>
-            <td>Sci-Fi</td>
-            <td>Space exploration drama.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>SHOWTIME</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Showtime_ID</th>
-            <th>Auditorium</th>
-            <th>Movie</th>
-            <th>Show_Date</th>
-            <th>Start_Time</th>
-            <th>End_Time</th>
-            <th>Format</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Auditorium 1</td>
-            <td>Inception</td>
-            <td>2025-11-21</td>
-            <td>14:00:00</td>
-            <td>16:30:00</td>
-            <td>3D</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Auditorium 1</td>
-            <td>Inception</td>
-            <td>2025-11-21</td>
-            <td>17:00:00</td>
-            <td>19:30:00</td>
-            <td>3D</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Auditorium 1</td>
-            <td>Inception</td>
-            <td>2025-11-21</td>
-            <td>20:00:00</td>
-            <td>22:30:00</td>
-            <td>3D</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Auditorium 2</td>
-            <td>Toy Story</td>
-            <td>2025-11-21</td>
-            <td>12:00:00</td>
-            <td>13:21:00</td>
-            <td>2D</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Auditorium A</td>
-            <td>Interstellar</td>
-            <td>2025-11-21</td>
-            <td>15:00:00</td>
-            <td>18:49:00</td>
-            <td>IMAX</td>
-          </tr>
-        </tbody>
-      </table>
     </section>
 
-    <!-- Views -->
-    <section id="views" class="section">
-      <h2>Views</h2>
-
-      <article class="card wide">
-        <h3>1. <code>LongMoviesByGenre</code></h3>
-        <p>
-          Returns movies longer than 120 minutes, grouped by genre, cinema, and auditorium.
-        </p>
-        <pre><code>CREATE VIEW LongMoviesByGenre AS
-SELECT
-    c.Name AS Cinema_Name,
-    a.Name AS Auditorium_Name,
-    m.Title AS Movie_Title,
-    m.Genre
-FROM MOVIE m
-JOIN SHOWTIME s ON m.Title = s.Movie
-JOIN AUDITORIUM a ON s.Auditorium = a.Name
-JOIN CINEMA c ON a.Cinema_Name = c.Name
-WHERE CAST(m.Duration AS UNSIGNED) > 120
-GROUP BY m.Genre, c.Name, a.Name, m.Title;</code></pre>
-
-        <p><strong>Sample Result (with our data):</strong></p>
-        <table>
-          <thead>
-            <tr>
-              <th>Cinema_Name</th>
-              <th>Auditorium_Name</th>
-              <th>Movie_Title</th>
-              <th>Genre</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Galaxy Theaters</td>
-              <td>Auditorium 1</td>
-              <td>Inception</td>
-              <td>Sci-Fi</td>
-            </tr>
-            <tr>
-              <td>Starplex Cinema</td>
-              <td>Auditorium A</td>
-              <td>Interstellar</td>
-              <td>Sci-Fi</td>
-            </tr>
-          </tbody>
-        </table>
-      </article>
-
-      <article class="card wide">
-        <h3>2. <code>vw_cinema_auditorium_3d</code></h3>
-        <p>
-          Lists cinemas, their full address, and auditoriums with 3D support.
-        </p>
-        <pre><code>CREATE VIEW vw_cinema_auditorium_3d AS
-SELECT
-    c.Name AS cinema_name,
-    CONCAT(c.Street_Number, ', ', c.City, ', ', c.State, ' ', c.Zip_Code) AS cinema_address,
-    a.Name AS auditorium_name,
-    a.Capacity AS capacity,
-    a.Three_D_Support AS three_d_support
-FROM CINEMA c
-JOIN AUDITORIUM a
-    ON a.Cinema_Name = c.Name;</code></pre>
-
-        <p><strong>Sample Result (all auditoriums):</strong></p>
-        <table>
-          <thead>
-            <tr>
-              <th>cinema_name</th>
-              <th>cinema_address</th>
-              <th>auditorium_name</th>
-              <th>capacity</th>
-              <th>three_d_support</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Galaxy Theaters</td>
-              <td>123 Main St, Anaheim, CA 92801</td>
-              <td>Auditorium 1</td>
-              <td>150</td>
-              <td>TRUE</td>
-            </tr>
-            <tr>
-              <td>Galaxy Theaters</td>
-              <td>123 Main St, Anaheim, CA 92801</td>
-              <td>Auditorium 2</td>
-              <td>80</td>
-              <td>FALSE</td>
-            </tr>
-            <tr>
-              <td>Starplex Cinema</td>
-              <td>456 Center Rd, Fullerton, CA 92832</td>
-              <td>Auditorium A</td>
-              <td>120</td>
-              <td>TRUE</td>
-            </tr>
-          </tbody>
-        </table>
-      </article>
-
-      <article class="card wide">
-        <h3>3. <code>vw_movies_more_than_3_per_day</code></h3>
-        <p>
-          Shows movies that play more than 3 times on the same day.
-        </p>
-        <pre><code>CREATE VIEW vw_movies_more_than_3_per_day AS
-SELECT
-    m.Title AS movie_title,
-    s.Show_Date AS show_date,
-    COUNT(*) AS show_count
-FROM SHOWTIME s
-JOIN MOVIE m
-    ON s.Movie = m.Title
-GROUP BY
-    m.Title,
-    s.Show_Date
-HAVING
-    COUNT(*) > 3;</code></pre>
-
-        <p><strong>Sample Result:</strong></p>
-        <p>With our current sample data, no movie has more than 3 showtimes in a single day, so this view returns an empty set.</p>
-      </article>
-    </section>
-
-    <!-- Full SQL -->
-    <section id="sql" class="section">
-      <h2>Full SQL Script</h2>
-      <p>You can copy this script directly into MySQL Workbench to recreate our demo.</p>
-      <pre class="sql-block"><code>/*CREATE DATABASE MovieDB;
-
-
-CREATE TABLE CINEMA
-(Name            VARCHAR(25)     NOT NULL,
- Street_Number   VARCHAR(45)     NOT NULL,
- City            VARCHAR(30)     NOT NULL,
- State           VARCHAR(20)     NOT NULL,
- Zip_Code        CHAR(5),
- Employees       INT,
- PRIMARY KEY(Name)
-);
-CREATE TABLE EMPLOYEE
-(Employee_ID     INT,
- Name            VARCHAR(30),
- Role            VARCHAR(20),
- Email           VARCHAR(25),
- Address         VARCHAR(50),
- Phone_Number    VARCHAR(13),
- Password        VARCHAR(20),
- PRIMARY KEY(Employee_ID)
-);
-CREATE TABLE AUDITORIUM
-(Name            VARCHAR(20),
- Capacity        INT,
- Cinema_Name     VARCHAR(25),
- Three_D_Support BOOLEAN,
- IMAX_Support    BOOLEAN,
- PRIMARY KEY(Name)
-);
-CREATE TABLE MOVIE
-(Title           VARCHAR(50),
- Year            CHAR(4),
- Duration        CHAR(5),
- Rating          VARCHAR(5),
- Release_Date    DATE,
- Genre           VARCHAR(15),
- Description     VARCHAR(300),
- PRIMARY KEY(Title)
-);
-CREATE TABLE SHOWTIME
-(Showtime_ID     INT,
- Auditorium      VARCHAR(20),
- Movie           VARCHAR(50),
- Show_Date       DATE,
- Start_Time      TIME,
- End_Time        TIME,
- Format          VARCHAR(8),
- PRIMARY KEY(Showtime_ID)
-);*/
-USE MovieDB;
-DELETE FROM CINEMA;
-DELETE FROM AUDITORIUM;
-DELETE FROM MOVIE;
-DELETE FROM SHOWTIME;
-INSERT INTO CINEMA 
-VALUES 
-('Galaxy Theaters', '123 Main St', 'Anaheim', 'CA', '92801', 30),
-('Starplex Cinema', '456 Center Rd', 'Fullerton', 'CA', '92832', 25);
-
-INSERT INTO AUDITORIUM 
-VALUES
-('Auditorium 1', 150, 'Galaxy Theaters', TRUE, FALSE),
-('Auditorium 2', 80, 'Galaxy Theaters', FALSE, FALSE),
-('Auditorium A', 120, 'Starplex Cinema', TRUE, TRUE);
-
-INSERT INTO MOVIE 
-VALUES
-('Inception', '2010', '148', 'PG-13', '2010-07-16', 'Sci-Fi', 'A mind-bending thriller.'),
-('Toy Story', '1995', '81', 'G', '1995-11-22', 'Animation', 'Animated family film.'),
-('Interstellar', '2014', '169', 'PG-13', '2014-11-07', 'Sci-Fi', 'Space exploration drama.');
-
-INSERT INTO SHOWTIME 
-VALUES
-(1, 'Auditorium 1', 'Inception', '2025-11-21', '14:00:00', '16:30:00', '3D'),
-(2, 'Auditorium 1', 'Inception', '2025-11-21', '17:00:00', '19:30:00', '3D'),
-(3, 'Auditorium 1', 'Inception', '2025-11-21', '20:00:00', '22:30:00', '3D'),
-(4, 'Auditorium 2', 'Toy Story', '2025-11-21', '12:00:00', '13:21:00', '2D'),
-(5, 'Auditorium A', 'Interstellar', '2025-11-21', '15:00:00', '18:49:00', 'IMAX');
-
-CREATE VIEW LongMoviesByGenre AS
-SELECT
-    c.Name AS Cinema_Name,
-    a.Name AS Auditorium_Name,
-    m.Title AS Movie_Title,
-    m.Genre
-FROM MOVIE m
-JOIN SHOWTIME s ON m.Title = s.Movie
-JOIN AUDITORIUM a ON s.Auditorium = a.Name
-JOIN CINEMA c ON a.Cinema_Name = c.Name
-WHERE CAST(m.Duration AS UNSIGNED) > 120
-GROUP BY m.Genre, c.Name, a.Name, m.Title;
-
-CREATE VIEW vw_cinema_auditorium_3d AS
-SELECT
-    c.Name AS cinema_name,
-    CONCAT(c.Street_Number, ', ', c.City, ', ', c.State, ' ', c.Zip_Code) AS cinema_address,
-    a.Name AS auditorium_name,
-    a.Capacity AS capacity,
-    a.Three_D_Support AS three_d_support
-FROM CINEMA c
-JOIN AUDITORIUM a
-    ON a.Cinema_Name = c.Name;
-
-CREATE VIEW vw_movies_more_than_3_per_day AS
-SELECT
-    m.Title AS movie_title,
-    s.Show_Date AS show_date,
-    COUNT(*) AS show_count
-FROM SHOWTIME s
-JOIN MOVIE m
-    ON s.Movie = m.Title
-GROUP BY
-    m.Title,
-    s.Show_Date
-HAVING
-    COUNT(*) > 3;</code></pre>
-    </section>
   </main>
-
   <footer class="site-footer">
-    <p>MovieDB Demo · CPSC 332 · The Relationals</p>
+    <p>Movielations - The Relationals</p>
   </footer>
 
   <script src="scripts.js"></script>
