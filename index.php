@@ -12,19 +12,7 @@
     if (!$sqli) {
       die("Connection failed: " . mysqli_connect_error());
     }
-    $password = $email = "";
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      $name = test_input($_POST["email"]);
-      $email = test_input($_POST["password"]);
-    }
-
-    function test_input($data) {
-      $data = trim($data);
-      $data = stripslashes($data);
-      $data = htmlspecialchars($data);
-      return $data;
-    }
+    
   ?>
 
 <head>
@@ -43,7 +31,7 @@
     <nav class="nav">
       <button class="nav-btn active" data-section="overview">Overview</button>
       <button class="nav-btn" data-section="schema">Schema</button>
-      <button class="nav-btn" data-section="emplogin">Login</button>
+      <button class="nav-btn" onclick="window.location.href='login.php'">Login</button>
     </nav>
   </header>
 
@@ -134,18 +122,7 @@
       </div>
     </section>
 
-    <!-- Login -->
-    <section id="emplogin" class="section">
-      <h2>Employee Login</h2>
-      <form action="search.php" method="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <p>Name: <input type="text" name="name"><br></p>
-        <p>E-mail: <input type="text" name="email"><br></p>
-        <input type="submit" class="nav-btn">
-      </form>
-      <br>
-      <a href="create_acc.php" class="hlink">Create an Account</a>
-
-    </section>
+    
 
   </main>
   <footer class="site-footer">
