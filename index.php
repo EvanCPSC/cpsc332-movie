@@ -142,8 +142,8 @@
         <p>E-mail: <input type="text" name="email"><br></p>
         <input type="submit" class="nav-btn">
       </form>
-
-      <a href="create_acc.php">Create an Account</a>
+      <br>
+      <a href="create_acc.php" class="hlink">Create an Account</a>
 
     </section>
 
