@@ -12,6 +12,10 @@
     if (!$sqli) {
       die("Connection failed: " . mysqli_connect_error());
     }
+
+    $vw_cinemas = mysqli_query($sqli,"SELECT * FROM vw_cinemaauditorium3d");
+    $vw_long = mysqli_query($sqli,"SELECT * FROM vw_longmoviesbygenre");
+    $vw_freq = mysqli_query($sqli,"SELECT * FROM vw_moviesmorethan3days");
     
   ?>
 
@@ -31,6 +35,9 @@
     <nav class="nav">
       <button class="nav-btn active" data-section="overview">Overview</button>
       <button class="nav-btn" data-section="schema">Schema</button>
+      <button class="nav-btn" data-section="cinemas">Cinemas</button>
+      <button class="nav-btn" data-section="longmovies">Long Movies</button>
+      <button class="nav-btn" data-section="freqmovies">Frequently Shown Movies</button>
       <button class="nav-btn" onclick="window.location.href='login.php'">Login</button>
     </nav>
   </header>
@@ -122,7 +129,89 @@
       </div>
     </section>
 
-    
+    <!-- Cinemas -->
+    <section id="cinemas" class="section">
+      <h2>Cinemas</h2>
+      <table>
+        <tr>
+            <!-- column headers -->
+            <?php
+            $columns = mysqli_fetch_fields($vw_cinemas);
+            foreach ($columns as $col) {
+                echo "<th>{$col->name}</th>";
+            }
+            ?>
+        </tr>
+
+          <!-- table rows -->
+          <?php
+          mysqli_data_seek($vw_cinemas, 0);
+          while ($row = mysqli_fetch_assoc($vw_cinemas)) {
+              echo "<tr>";
+              foreach ($row as $value) {
+                  echo "<td>" . htmlspecialchars($value) . "</td>";
+              }
+              echo "</tr>";
+          }
+          ?>
+      </table>
+    </section>
+
+    <!-- Long Movies -->
+    <section id="longmovies" class="section">
+      <h2>Long Movies</h2>
+      <table>
+        <tr>
+            <!-- column headers -->
+            <?php
+            $columns = mysqli_fetch_fields($vw_long);
+            foreach ($columns as $col) {
+                echo "<th>{$col->name}</th>";
+            }
+            ?>
+        </tr>
+
+          <!-- table rows -->
+          <?php
+          mysqli_data_seek($vw_long, 0);
+          while ($row = mysqli_fetch_assoc($vw_long)) {
+              echo "<tr>";
+              foreach ($row as $value) {
+                  echo "<td>" . htmlspecialchars($value) . "</td>";
+              }
+              echo "</tr>";
+          }
+          ?>
+      </table>
+    </section>
+
+    <!-- Frequently Shown Movies -->
+    <section id="freqmovies" class="section">
+      <h2>Frequently Shown Movies</h2>
+      <table>
+        <tr>
+            <!-- column headers -->
+            <?php
+            $columns = mysqli_fetch_fields($vw_freq);
+            foreach ($columns as $col) {
+                echo "<th>{$col->name}</th>";
+            }
+            ?>
+        </tr>
+
+          <!-- table rows -->
+          <?php
+          mysqli_data_seek($vw_freq, 0);
+          while ($row = mysqli_fetch_assoc($vw_freq)) {
+              echo "<tr>";
+              foreach ($row as $value) {
+                  echo "<td>" . htmlspecialchars($value) . "</td>";
+              }
+              echo "</tr>";
+          }
+          ?>
+      </table>
+    </section>
 
   </main>
   <footer class="site-footer">

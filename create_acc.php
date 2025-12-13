@@ -24,7 +24,7 @@
 <body>
   <header class="site-header">
     <div class="title-block">
-      <h1>Movielations Login</h1>
+      <h1>Movielations Create Account</h1>
       <p class="subtitle">CPSC 332 Final Project by The Relationals</p>
       <p class="subtitle small">Adrian Vazquez - Evan Jimenez - AP Calderon - Joshua Artienda - Leighton Hsieh</p>
     </div>
