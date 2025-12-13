@@ -18,7 +18,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Movielations</title>
+  <title>Create Account - Movielations</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -59,7 +59,7 @@
         if (empty($_POST["name"])) {
           $nameErr = "Please Enter a Name";
         } else {
-          $name = test_input($_POST["pwd"]);
+          $name = test_input($_POST["name"]);
         }
 
         if (empty($_POST["address"])) {

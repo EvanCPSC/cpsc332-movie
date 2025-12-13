@@ -18,7 +18,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Movielations</title>
+  <title>Employee Login - Movielations</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -55,10 +55,10 @@
           $pwd = test_input($_POST["pwd"]);
         }
         if ($emailErr == "" && $pwdErr == "") {
-          $sql = "SELECT 'Employee_ID' FROM employee WHERE (Email = '{$email}' AND Password = '{$pwd}');";
+          $sql = "SELECT Employee_ID FROM employee WHERE (Email = '{$email}' AND Password = '{$pwd}');";
           $result = mysqli_query($sqli, $sql);
           if ($result) {
-            header("Location: search.php");
+            header("Location: search.php?empid=".mysqli_fetch_assoc($result)["Employee_ID"]);
             exit();
           }
         }
