@@ -54,7 +54,14 @@
         } else {
           $pwd = test_input($_POST["pwd"]);
         }
-        
+        if ($emailErr == "" && $pwdErr == "") {
+          $sql = "SELECT 'Employee_ID' FROM employee WHERE (Email = '{$email}' AND Password = '{$pwd}');";
+          $result = mysqli_query($sqli, $sql);
+          if ($result) {
+            header("Location: search.php");
+            exit();
+          }
+        }
       }
 
       function test_input($data) {
