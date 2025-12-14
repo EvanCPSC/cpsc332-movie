@@ -12,7 +12,7 @@ CREATE TABLE CINEMA (
     PRIMARY KEY(Name)
 );
 CREATE TABLE EMPLOYEE (
-    Employee_ID	    INT,
+    Employee_ID	    INT AUTO_INCREMENT,
     Name			VARCHAR(30),
     Role			VARCHAR(20),
     Email			VARCHAR(25),
@@ -40,9 +40,9 @@ CREATE TABLE MOVIE (
     PRIMARY KEY(Title)
 );
 CREATE TABLE SHOWTIME (
-    Showtime_ID	    INT,
+    Showtime_ID	    INT AUTO_INCREMENT,
     Auditorium		VARCHAR(20),
-    Cinema,         VARCHAR(20),
+    Cinema          VARCHAR(20),
     Movie			VARCHAR(50),
     Show_Date		DATE,
     Start_Time		TIME,
