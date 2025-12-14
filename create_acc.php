@@ -74,8 +74,6 @@
           $phone = test_input($_POST["phone"]);
         }
 
-
-
         if ($emailErr == "" && $pwdErr == "" && $nameErr == "" && $addrErr == "" && $phoneErr == "") {
           $sql = "INSERT INTO employee (Name, Email, Address, Phone_Number, Password)
             VALUES ('{$name}', '{$email}', '{$addr}', '{$phone}', '{$pwd}');";

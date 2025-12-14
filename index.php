@@ -15,7 +15,7 @@
 
     $vw_cinemas = mysqli_query($sqli,"SELECT * FROM vw_cinemaauditorium3d");
     $vw_long = mysqli_query($sqli,"SELECT * FROM vw_longmoviesbygenre");
-    $vw_freq = mysqli_query($sqli,"SELECT * FROM vw_moviesmorethan3days");
+    $vw_freq = mysqli_query($sqli,"SELECT * FROM vw_moviesmorethan3perday");
     
   ?>
 
@@ -162,7 +162,7 @@
       <h2>Long Movies</h2>
       <table>
         <tr>
-            <!-- column headers -->
+            <!-- Column Headers -->
             <?php
             $columns = mysqli_fetch_fields($vw_long);
             foreach ($columns as $col) {
@@ -170,8 +170,7 @@
             }
             ?>
         </tr>
-
-          <!-- table rows -->
+          <!-- Table Rows -->
           <?php
           mysqli_data_seek($vw_long, 0);
           while ($row = mysqli_fetch_assoc($vw_long)) {
