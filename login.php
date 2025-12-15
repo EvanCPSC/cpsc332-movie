@@ -91,7 +91,7 @@
 
   <script src="scripts.js"></script>
 </body>
-<?php
-mysqli_close($sqli);
-?>
+  <?php
+    mysqli_close($sqli);
+  ?>
 </html>

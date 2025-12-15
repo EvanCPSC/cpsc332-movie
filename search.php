@@ -12,26 +12,28 @@
     if (!$sqli) {
       die("Connection failed: " . mysqli_connect_error());
     }
+    
 
     $search_query = "SELECT Movie, Show_Date, Start_Time, End_Time, Cinema, Auditorium, Format FROM showtime WHERE Showtime_ID >= 0 ";
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $title = $_POST["title"];
-        $loc = $_POST["location"];
-        $date = $_POST["date"];
-        $time = $_POST["time"];
-        if (!empty($title)) {
-          $search_query .= "AND LOCATE(TRIM('{$title}'), Movie) = 1";
-        }
-        if (!empty($loc)) {
-          $search_query .= "AND LOCATE(TRIM('{$loc}'), Cinema) = 1";
-        }
-        if (!empty($date)) {
-          $search_query .= "AND LOCATE('{$date}', Show_Date) = 1";
-        }
-        if (strlen($time) > 7) {
-          $search_query .= "AND LOCATE('{$time}', Start_Time) = 1";
-        }
+      $title = $_POST["title"];
+      $loc = $_POST["location"];
+      $date = $_POST["date"];
+      $time = $_POST["showtime"];
+      $empidp = $_POST["empid"];
+      if (!empty($title)) {
+        $search_query .= "AND LOCATE(TRIM('{$title}'), Movie) = 1";
+      }
+      if (!empty($loc)) {
+        $search_query .= "AND LOCATE(TRIM('{$loc}'), Cinema) = 1";
+      }
+      if (!empty($date)) {
+        $search_query .= "AND LOCATE('{$date}', Show_Date) = 1";
+      }
+      if ($time != "default") {
+        $search_query .= "AND Start_Time = '{$time}'";
+      }
     }
     $search_query .= ";";
     $search_result = mysqli_query($sqli,$search_query);
@@ -54,13 +56,9 @@
   <header class="site-header">
     <div class="title-block">
       <?php
-        $empid = $_GET["empid"];
-        $empname = mysqli_fetch_assoc(mysqli_query($sqli, "SELECT Name FROM employee WHERE Employee_ID = '{$empid}'"))["Name"];
-        if ($empname == "") {
-            header("Location: login.php");
-            exit();
-        }
-        echo "<h1>Welcome ".$empname."</h1>";
+        $empid = $_GET['empid'] ?? $_POST['empid'] ?? null;
+        $empname = mysqli_query($sqli, "SELECT Name FROM employee WHERE Employee_ID = '{$empid}'");
+        echo "<h1>Welcome ".mysqli_fetch_assoc($empname)["Name"]."</h1>";
       ?>
       <p class="subtitle">Movielations by The Relationals</p>
       <p class="subtitle small">Adrian Vazquez - Evan Jimenez - AP Calderon - Joshua Artienda - Leighton Hsieh</p>
@@ -76,42 +74,43 @@
     <section id="search" class="section visible">
       <h2>Movie Search</h2>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-      <p>
-        <input type="text" name="title" placeholder="Title">
-        <input type="text" name="location" placeholder="Cinema">
-        <input type="date" name="date" placeholder="Date">
-        <select id="showtime" name="showtime">
-                <option value="default" selected>Showtime</option>
-                <?php
-                  for ($i = 10; $i <= 20; $i++) {
-                    echo "<option value=\"".$i.":00:00\">".$i.":00:00</option>";
-                  }
-                ?>
-        </select>
-        <input type="submit" class="nav-btn">
-      </p>
+        <p>
+          <input type="hidden" name="empid" value="<?php echo $empid; ?>">
+          <input type="text" name="title" placeholder="Title">
+          <input type="text" name="location" placeholder="Cinema">
+          <input type="date" name="date" placeholder="Date">
+          <select id="showtime" name="showtime">
+            <option value="default" selected>Showtime</option>
+            <?php
+              for ($i = 10; $i <= 20; $i++) {
+                echo "<option value=\"".$i.":00:00\">".$i.":00:00</option>";
+              }
+            ?>
+          </select>
+          <input type="submit" class="nav-btn">
+        </p>
       </form>
       <!-- Movie Table -->
       <table>
         <tr>
             <!-- Column Headers -->
             <?php
-            $columns = mysqli_fetch_fields($search_result);
-            foreach ($columns as $col) {
-                echo "<th>{$col->name}</th>";
-            }
+              $columns = mysqli_fetch_fields($search_result);
+              foreach ($columns as $col) {
+                  echo "<th>{$col->name}</th>";
+              }
             ?>
         </tr>
           <!-- Table Rows -->
           <?php
-          mysqli_data_seek($search_result, 0);
-          while ($row = mysqli_fetch_assoc($search_result)) {
-              echo "<tr>";
-              foreach ($row as $value) {
-                  echo "<td>" . htmlspecialchars($value) . "</td>";
-              }
-              echo "</tr>";
-          }
+            mysqli_data_seek($search_result, 0);
+            while ($row = mysqli_fetch_assoc($search_result)) {
+                echo "<tr>";
+                foreach ($row as $value) {
+                    echo "<td>" . htmlspecialchars($value) . "</td>";
+                }
+                echo "</tr>";
+            }
           ?>
       </table>
     </section>
@@ -123,7 +122,7 @@
 
   <script src="scripts.js"></script>
 </body>
-<?php
-mysqli_close($sqli);
-?>
+  <?php
+    mysqli_close($sqli);
+  ?>
 </html>

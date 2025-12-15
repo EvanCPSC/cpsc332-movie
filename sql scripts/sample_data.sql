@@ -46,7 +46,7 @@ VALUES
 ('Avengers: Endgame', '2019', '181', 'PG-13', '2019-04-26', 'Action', 'Heroes unite.'),
 ('Interstellar', '2014', '169', 'PG-13', '2014-11-07', 'Sci-Fi', 'Space exploration drama.');
 
-INSERT INTO SHOWTIME ()
+INSERT INTO SHOWTIME (Auditorium, Cinema, Movie, Show_Date, Start_Time, End_Time, Format)
 VALUES
 ('Auditorium 1', 'Galaxy Theatres', 'Inception', '2025-11-21', '11:00:00', '13:30:00', '3D'),
 ('Auditorium 1', 'Galaxy Theatres', 'Inception', '2025-11-21', '14:00:00', '16:30:00', '3D'),
@@ -115,5 +115,6 @@ VALUES
 ('Auditorium F', 'Starplex Cinemas', 'Pixels', '2025-11-25', '15:00:00', '18:30:00', '3D'),
 ('Auditorium E', 'Starplex Cinemas', 'KPop Demon Hunters', '2025-11-24', '14:00:00', '16:00:00', 'IMAX'),
 ('Auditorium E', 'Starplex Cinemas', 'KPop Demon Hunters', '2025-11-25', '14:00:00', '16:00:00', 'IMAX'),
-('Auditorium E', 'Starplex Cinemas', 'KPop Demon Hunters', '2025-11-26', '15:00:00', '17:00:00', 'IMAX');
+('Auditorium E', 'Starplex Cinemas', 'KPop Demon Hunters', '2025-11-26', '15:00:00', '17:00:00', 'IMAX'),
+('Auditorium E', 'Starplex Cinemas', 'Polar Express', '2025-12-14', '11:00:00', '13:00:00', 'None');
 

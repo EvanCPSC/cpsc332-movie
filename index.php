@@ -116,6 +116,7 @@
           <ul>
             <li>Showtime_ID (INT)</li>
             <li>Auditorium (VARCHAR(20))</li>
+            <li>Cinema (VARCHAR(20))</li>
             <li>Movie (VARCHAR(50))</li>
             <li>Show_Date (DATE)</li>
             <li>Start_Time (TIME)</li>
@@ -129,30 +130,30 @@
       </div>
     </section>
 
-    <!-- Cinemas -->
+    <!-- Auditoriums -->
     <section id="cinemas" class="section">
-      <h2>Cinemas</h2>
+      <h2>Auditoriums</h2>
       <table>
         <tr>
             <!-- column headers -->
             <?php
-            $columns = mysqli_fetch_fields($vw_cinemas);
-            foreach ($columns as $col) {
-                echo "<th>{$col->name}</th>";
-            }
+              $columns = mysqli_fetch_fields($vw_cinemas);
+              foreach ($columns as $col) {
+                  echo "<th>{$col->name}</th>";
+              }
             ?>
         </tr>
 
           <!-- table rows -->
           <?php
-          mysqli_data_seek($vw_cinemas, 0);
-          while ($row = mysqli_fetch_assoc($vw_cinemas)) {
+            mysqli_data_seek($vw_cinemas, 0);
+            while ($row = mysqli_fetch_assoc($vw_cinemas)) {
               echo "<tr>";
               foreach ($row as $value) {
-                  echo "<td>" . htmlspecialchars($value) . "</td>";
+                echo "<td>" . htmlspecialchars($value) . "</td>";
               }
               echo "</tr>";
-          }
+            }
           ?>
       </table>
     </section>
@@ -162,24 +163,24 @@
       <h2>Long Movies</h2>
       <table>
         <tr>
-            <!-- Column Headers -->
-            <?php
+          <!-- Column Headers -->
+          <?php
             $columns = mysqli_fetch_fields($vw_long);
             foreach ($columns as $col) {
-                echo "<th>{$col->name}</th>";
+              echo "<th>{$col->name}</th>";
             }
-            ?>
+          ?>
         </tr>
           <!-- Table Rows -->
           <?php
-          mysqli_data_seek($vw_long, 0);
-          while ($row = mysqli_fetch_assoc($vw_long)) {
+            mysqli_data_seek($vw_long, 0);
+            while ($row = mysqli_fetch_assoc($vw_long)) {
               echo "<tr>";
               foreach ($row as $value) {
-                  echo "<td>" . htmlspecialchars($value) . "</td>";
+                 echo "<td>" . htmlspecialchars($value) . "</td>";
               }
               echo "</tr>";
-          }
+            }
           ?>
       </table>
     </section>
@@ -189,25 +190,24 @@
       <h2>Frequently Shown Movies</h2>
       <table>
         <tr>
-            <!-- column headers -->
-            <?php
+          <!-- column headers -->
+          <?php
             $columns = mysqli_fetch_fields($vw_freq);
             foreach ($columns as $col) {
-                echo "<th>{$col->name}</th>";
+              echo "<th>{$col->name}</th>";
             }
-            ?>
+          ?>
         </tr>
-
           <!-- table rows -->
           <?php
-          mysqli_data_seek($vw_freq, 0);
-          while ($row = mysqli_fetch_assoc($vw_freq)) {
+            mysqli_data_seek($vw_freq, 0);
+            while ($row = mysqli_fetch_assoc($vw_freq)) {
               echo "<tr>";
               foreach ($row as $value) {
-                  echo "<td>" . htmlspecialchars($value) . "</td>";
+                echo "<td>" . htmlspecialchars($value) . "</td>";
               }
               echo "</tr>";
-          }
+            }
           ?>
       </table>
     </section>
@@ -219,7 +219,7 @@
 
   <script src="scripts.js"></script>
 </body>
-<?php
-mysqli_close($sqli);
-?>
+  <?php
+    mysqli_close($sqli);
+  ?>
 </html>

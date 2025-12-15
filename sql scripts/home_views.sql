@@ -21,7 +21,8 @@ SELECT
     a.Three_D_Support AS three_d_support
 FROM CINEMA c
 JOIN AUDITORIUM a
-    ON a.Cinema_Name = c.Name;
+    ON a.Cinema_Name = c.Name
+SORT BY c.Name, a.Name;
 
 CREATE VIEW vw_moviesmorethan3perday AS
 SELECT

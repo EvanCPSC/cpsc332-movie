@@ -102,13 +102,13 @@
         <p>Address: <input type="text" name="address"><br></p>
         <p>Phone Number: <input type="text" name="phone"><br></p>
         <p>Role: 
-            <select id="roles" name="role">
-                <option value="concessions" selected>Concessions</option>
-                <option value="ticketing">Ticketing</option>
-                <option value="technician">Technician</option>
-                <option value="usher">Usher</option>
-                <option value="manager">Theater Manager</option>
-            </select><br>
+          <select id="roles" name="role">
+            <option value="concessions" selected>Concessions</option>
+            <option value="ticketing">Ticketing</option>
+            <option value="technician">Technician</option>
+            <option value="usher">Usher</option>
+            <option value="manager">Theater Manager</option>
+          </select><br>
         </p>
         <input type="submit" class="nav-btn">
       </form>
@@ -124,7 +124,7 @@
 
   <script src="scripts.js"></script>
 </body>
-<?php
-mysqli_close($sqli);
-?>
+  <?php
+    mysqli_close($sqli);
+  ?>
 </html>
